@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Intelligent Mobile Phone Comparison</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<script>
+    const phones = [
+        { name: "iPhone 14", rating: 4.5 },
+        { name: "Samsung S23", rating: 4.6 },
+        { name: "OnePlus 11", rating: 4.4 },
+        { name: "Redmi Note 13 Pro", rating: 4.3 }
+    ];
+
+    let bestPhone = phones[0];
+
+    for (let i = 1; i < phones.length; i++) {
+        if (phones[i].rating > bestPhone.rating) {
+            bestPhone = phones[i];
+        }
+    }
+
+    document.getElementById("result").innerHTML =
+        "Based on data-driven decision making support for users through simplified comparison dashboards, the Best Overall Phone is: <b>" 
+        + bestPhone.name + "</b>";
+</script>
+<body>
+
+<h1>Intelligent Mobile Phone Comparison Dashboard</h1>
+
+<div class="container">
+
+    <div class="card" data-price="70000" data-ram="6" data-battery="3279" data-rating="4.5">
+        <h2>iPhone 14</h2>
+        <p>Price: ₹70,000</p>
+        <p>RAM: 6GB</p>
+        <p>Battery: 3279mAh</p>
+        <p>Rating: ⭐ 4.5</p>
+    </div>
+
+    <div class="card" data-price="65000" data-ram="8" data-battery="3900" data-rating="4.6">
+        <h2>Samsung S23</h2>
+        <p>Price: ₹65,000</p>
+        <p>RAM: 8GB</p>
+        <p>Battery: 3900mAh</p>
+        <p>Rating: ⭐ 4.6</p>
+    </div>
+
+    <div class="card" data-price="55000" data-ram="8" data-battery="5000" data-rating="4.4">
+        <h2>OnePlus 11</h2>
+        <p>Price: ₹55,000</p>
+        <p>RAM: 8GB</p>
+        <p>Battery: 5000mAh</p>
+        <p>Rating: ⭐ 4.4</p>
+    </div>
+
+    <div class="card" data-price="25000" data-ram="8" data-battery="5100" data-rating="4.3">
+        <h2>Redmi Note 13 Pro</h2>
+        <p>Price: ₹25,000</p>
+        <p>RAM: 8GB</p>
+        <p>Battery: 5100mAh</p>
+        <p>Rating: ⭐ 4.3</p>
+    </div>
+
+</div>
+
+<div class="dashboard">
+    <h2>📊 Decision Support Result</h2>
+    <p id="result"></p>
+</div>
+
+<script>
+
+function calculateBestPhone() {
+    let cards = document.querySelectorAll(".card");
+    let bestScore = 0;
+    let bestPhone = "";
+
+    cards.forEach(card => {
+        let price = parseInt(card.dataset.price);
+        let ram = parseInt(card.dataset.ram);
+        let battery = parseInt(card.dataset.battery);
+        let rating = parseFloat(card.dataset.rating);
+
+        // Simple Data Driven Scoring Logic
+        let score = (ram * 2) + (battery / 1000) + (rating * 5) - (price / 20000);
+
+        if (score > bestScore) {
+            bestScore = score;
+            bestPhone = card.querySelector("h2").innerText;
+        }
+    });
+
+    document.getElementById("result").innerText =
+        "🏆 Based on data analysis, the Best Overall Phone is: " + bestPhone;
+}
+
+calculateBestPhone();
+
+</script>
+
+</body>
+</html>
